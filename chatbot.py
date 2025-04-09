@@ -25,7 +25,7 @@ client_config = {
         "javascript_origins": [st.secrets["google"]["javascript_origins"]]
     }
 }
-REDIRECT_URI = 'http://localhost:8501/'
+REDIRECT_URI = 'https://250409chatbot-yc6qdsjgwjrawbspvtdvqv.streamlit.app/'
 
 st.set_page_config(page_title="Data_Team", page_icon="🧠", layout="wide")
 st.sidebar.markdown("### ✍️ Made by [KMD]('노션추가') 🚀")
