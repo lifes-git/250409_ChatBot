@@ -22,7 +22,7 @@ client_config = {
         "auth_provider_x509_cert_url":st.secrets["google"]["auth_provider_x509_cert_url"],
         "client_secret": st.secrets["google"]["client_secret"],
         "redirect_uris": [st.secrets["google"]["redirect_uris"]],
-        "javascript_origins": st.secrets["google"]["javascript_origins"]
+        "javascript_origins": [st.secrets["google"]["javascript_origins"]]
     }
 }
 REDIRECT_URI = 'http://localhost:8501/'
