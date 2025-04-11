@@ -14,15 +14,18 @@ from functions import map_city_to_two_letters,extract_and_remove_city,extract_an
 
 SCOPES = ["https://www.googleapis.com/auth/drive", "https://www.googleapis.com/auth/spreadsheets"]
 client_config = {
-    "installed": {
+    "web": {
         "client_id": st.secrets["google_oauth"]["client_id"],
-        "client_secret": st.secrets["google_oauth"]["client_secret"],
+        "project_id": st.secrets["google_oauth"]["project_id"],
         "auth_uri": st.secrets["google_oauth"]["auth_uri"],
         "token_uri": st.secrets["google_oauth"]["token_uri"],
-        "redirect_uris": st.secrets["google_oauth"]["redirect_uris"]
+        "auth_provider_x509_cert_url": st.secrets["google_oauth"]["auth_provider_x509_cert_url"],
+        "client_secret": st.secrets["google_oauth"]["client_secret"],
+        "redirect_uris": st.secrets["google_oauth"]["redirect_uris"],
+        "javascript_origins": st.secrets["google_oauth"]["javascript_origins"]
     }
 }
-REDIRECT_URI = 
+
 
 st.set_page_config(page_title="Data_Team", page_icon="🧠", layout="wide")
 st.sidebar.markdown("### ✍️ Made by [KMD]('노션추가') 🚀")
@@ -130,10 +133,10 @@ for msg in st.session_state.messages:
 if not st.session_state.credentials and "code" not in st.query_params:
     st.info("Google Drive 접근을 위해 인증이 필요합니다.")
     if st.button("🔐 Google Drive 인증 시작"):
-        flow = Flow.from_client_secrets_file(
-            CLIENT_SECRET_FILE,
+        flow = Flow.from_client_config(
+            client_config = client_config,
             scopes=SCOPES,
-            redirect_uri=REDIRECT_URI
+            redirect_uri=st.secrets["google_oauth"]["redirect_uris"][1]
         )
         auth_url, _ = flow.authorization_url(prompt='consent')
         st.session_state.flow = flow
